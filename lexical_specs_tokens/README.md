@@ -17,14 +17,14 @@ This project demonstrates a clean, production-friendly lexical analyzer using JF
 
 ```bash
 mvn clean package
-
+```
 Run the runner that tokenizes a sample string:
-
-java -cp target/classes com.example.lexer.LexerRunner
-
+```bash
+java -cp target/classes com.workshop.LexerRunner
+```
 Or use Maven exec plugin:
-
-mvn -q exec:java -Dexec.mainClass="com.example.lexer.LexerRunner"
+```bash
+mvn -q exec:java -Dexec.mainClass="com.workshop.LexerRunner"
 ```
 
 ## Notes
