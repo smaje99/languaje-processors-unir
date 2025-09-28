@@ -1,0 +1,12 @@
+# Java files ignored
+target/
+*.jar
+*.class
+*.war
+*.ear
+
+# Maven files ignored
+log/
+
+# VS Code files ignored
+.vscode/cspell.json
