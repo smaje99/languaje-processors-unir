@@ -13,4 +13,16 @@
         <maven.compiler.target>23</maven.compiler.target>
     </properties>
 
+
+
+    <dependencies>
+    
+
+        <dependency>
+            <groupId>de.jflex</groupId>
+            <artifactId>jflex</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+
+    </dependencies>
 </project>
