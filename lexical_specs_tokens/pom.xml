@@ -11,13 +11,43 @@
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
+        <jflex.version>1.8.2</jflex.version>
     </properties>
+
+    <build>
+        <plugins>
+            <!-- JFlex Maven Plugin: generate scanner from .flex specification -->
+            <plugin>
+                <groupId>de.jflex</groupId>
+                <artifactId>jflex-maven-plugin</artifactId>
+                <version>${jflex.version}</version>
+                <executions>
+                    <execution>
+                        <?m2e execute onConfiguration?>
+                        <id>generate-sources</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <specFiles>
+                                <specFile>src/main/jflex/lexer.flex</specFile>
+                            </specFiles>
+                            <targetDirectory>${project.basedir}/target/generated-sources/jflex</targetDirectory>
+                            <packageName>com.workshop</packageName>
+                            <encoding>UTF-8</encoding>
+                            <className>GeneratedLexer</className>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 
     <dependencies>
-    
-
         <dependency>
             <groupId>de.jflex</groupId>
             <artifactId>jflex</artifactId>
