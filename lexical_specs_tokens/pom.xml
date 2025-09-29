@@ -30,17 +30,45 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <specFiles>
-                                <specFile>src/main/jflex/lexer.flex</specFile>
-                            </specFiles>
-                            <targetDirectory>${project.basedir}/target/generated-sources/jflex</targetDirectory>
-                            <packageName>com.workshop</packageName>
-                            <encoding>UTF-8</encoding>
-                            <className>GeneratedLexer</className>
-                            <overwrite>true</overwrite>
+                            <outputDirectory>${project.build.directory}/generated-sources/jflex</outputDirectory>
+                            <lexDefinitions>
+                                <lexDefinition>src/main/jflex/lexer.flex</lexDefinition>
+                            </lexDefinitions>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Compiler plugin: include generated-sources/ directory -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <generatedSourcesDirectory>${project.build.directory}/generated-sources/jflex</generatedSourcesDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Execution plugin to run the runner with mvn exec:java -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.workshop.Main</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
