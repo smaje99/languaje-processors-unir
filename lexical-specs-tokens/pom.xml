@@ -8,8 +8,6 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>lexical-specs-tokens</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -86,5 +84,20 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <!-- JFlex Maven Plugin: generate scanner from .flex specification -->
+      <plugin>
+        <groupId>de.jflex</groupId>
+        <artifactId>jflex-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
