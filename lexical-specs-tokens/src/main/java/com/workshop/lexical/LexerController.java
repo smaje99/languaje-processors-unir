@@ -12,6 +12,10 @@ import java.util.Map;
  * and provides token analysis and statistics.
  */
 public final class LexerController {
+    public LexerController() {
+      // No initialization needed
+    }
+
     /**
      * Process input text through the lexer
      *
@@ -68,6 +72,19 @@ public final class LexerController {
                     false,
                     "Error during lexical analysis: " + e.getMessage());
         }
+    }
+
+    /**
+     * Format tokens as a readable string
+     * @param tokens List of tokens to format
+     * @return Formatted string representation
+     */
+    public String formatTokens(List<Token> tokens) {
+        StringBuilder sb = new StringBuilder();
+        for (Token token : tokens) {
+            sb.append(token.toString()).append("\n");
+        }
+        return sb.toString();
     }
 
     /**
