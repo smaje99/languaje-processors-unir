@@ -64,30 +64,39 @@ BLOCK_COMMENT = "/*" ~"*/"
 
 /* Lexical rules */
 
-{WHITESPACE} { /* skip whitespace */ }
+{WHITESPACE}        { /* skip whitespace */ }
 
-{LINE_COMMENT} { /* ignore single-line comment */ }
+{LINE_COMMENT}      { /* ignore single-line comment */ }
 
-{BLOCK_COMMENT} { /* ignore block comment */ }
+{BLOCK_COMMENT}     { /* ignore block comment */ }
 
-/* Operators and punctuation */
-"==" { makeToken(TokenConstants.EQUALS); }
-":=" { makeToken(TokenConstants.ASSIGN); }
-"=" { makeToken(TokenConstants.ASSIGN); }
-"+" { makeToken(TokenConstants.PLUS); }
-"-" { makeToken(TokenConstants.MINUS); }
-"*" { makeToken(TokenConstants.MULTIPLY); }
-"/" { makeToken(TokenConstants.DIVIDE); }
-"(" { makeToken(TokenConstants.LPAREN); }
-")" { makeToken(TokenConstants.RPAREN); }
-";" { makeToken(TokenConstants.SEMICOLON); }
+/* Operators and punctuation (two-char operators first) */
+"=="                { return makeToken(TokenConstants.EQUALS); }
+"!="                { return makeToken(TokenConstants.NOT_EQUALS); }
+"<="                { return makeToken(TokenConstants.LESS_EQUAL); }
+">="                { return makeToken(TokenConstants.GREATER_EQUAL); }
+":="                { return makeToken(TokenConstants.ASSIGN); }
 
-/* Numbers (FLOAT before INTEGER to match decimal first) */
-{FLOAT} { makeToken(TokenConstants.NUMBER); }
-{INTEGER} { makeToken(TokenConstants.NUMBER); }
+/* Single-char operators */
+"="                 { return makeToken(TokenConstants.ASSIGN); }
+"<"                 { return makeToken(TokenConstants.LESS_THAN); }
+">"                 { return makeToken(TokenConstants.GREATER_THAN); }
+"+"                 { return makeToken(TokenConstants.PLUS); }
+"-"                 { return makeToken(TokenConstants.MINUS); }
+"*"                 { return makeToken(TokenConstants.MULTIPLY); }
+"/"                 { return makeToken(TokenConstants.DIVIDE); }
+"("                 { return makeToken(TokenConstants.LPAREN); }
+")"                 { return makeToken(TokenConstants.RPAREN); }
+"{"                 { return makeToken(TokenConstants.LBRACE); }
+"}"                 { return makeToken(TokenConstants.RBRACE); }
+";"                 { return makeToken(TokenConstants.SEMICOLON); }
+
+/* Numbers (FLOAT before INTEGER to match decimal numbers first) */
+{FLOAT}             { return makeToken(TokenConstants.NUMBER); }
+{INTEGER}           { return makeToken(TokenConstants.NUMBER); }
 
 /* Identifiers and reserved words */
-{IDENTIFIER} { return makeIdentifierOrReserved(); }
+{IDENTIFIER}        { return makeIdentifierOrReserved(); }
 
 /* Any other character is an error */
-[^] { return new Token(TokenConstants.ERROR, yytext(), yyline + 1, yycolumn + 1); }
+[^]                 { return new Token(TokenConstants.ERROR, yytext(), yyline + 1, yycolumn + 1); }
